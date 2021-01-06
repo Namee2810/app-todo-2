@@ -1,4 +1,5 @@
 import InputField from 'components/CustomField/InputField';
+import createNotification from 'createNotification';
 import { FastField, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
@@ -13,7 +14,7 @@ function AddTodo(props) {
     todo: ""
   };
   const button = {
-    width: "200px",
+    width: "100px",
     height: "50px",
   };
 
@@ -38,6 +39,12 @@ function AddTodo(props) {
     });
     dispatch(action);
     setShow(false);
+    createNotification(
+      "success",
+      `Đã thêm "${values.todo.length > 20 ? values.todo.slice(20)+'...' : values.todo}" !`,
+      " ",
+      3000
+    );
   };
   
   return (
@@ -61,9 +68,9 @@ function AddTodo(props) {
 
                 placeholder="Bạn cần phải làm gì ..."
               />
-              <div className="d-flex justify-content-between">
-                <Button variant="danger" type="submit" onClick={handleCloseAddTodoForm} style={button}>Đóng</Button>
-                <Button variant="success" type="submit" style={button}>Thêm</Button>
+              <div className="d-flex">
+                <Button className="ml-auto mr-2" variant="danger" type="submit" onClick={handleCloseAddTodoForm} style={{...button}}>Đóng</Button>
+                <Button variant="success" type="submit" style={{...button}}>Thêm</Button>
               </div>
             </Form>
           }

@@ -1,6 +1,7 @@
 .Loading {
   height: 100vh;
   width: 100vh;
+  z-index: -999;
 
   & > img {
     position:absolute;

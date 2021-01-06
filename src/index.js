@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'react-notifications-component/dist/theme.css';
 import { Provider } from 'react-redux';
 import store from 'store';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+
 
 ReactDOM.render(
     <Provider store={store}>
