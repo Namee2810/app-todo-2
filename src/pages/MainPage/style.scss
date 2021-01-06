@@ -1,0 +1,20 @@
+.MainPage {
+  background-color: #F0EFE9;
+  min-height: 100vh;
+  padding: 50px 10px;
+
+  transition-delay: 2s;
+
+  &__main {
+    min-height: 80vh;
+    background-color: white;
+    border-radius: 5px;
+
+    box-shadow:
+      0 3.4px 2.7px rgba(0, 0, 0, 0.01),
+      0 8.7px 6.9px rgba(0, 0, 0, 0.019),
+      0 17.7px 14.2px rgba(0, 0, 0, 0.025),
+      0 36.5px 29.2px rgba(0, 0, 0, 0.03),
+      0 100px 80px rgba(0, 0, 0, 0.07)
+    }
+}

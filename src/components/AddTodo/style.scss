@@ -1,0 +1,15 @@
+.AddTodo {
+  width: 100%;
+
+  &__button {
+    position: absolute;
+    top: 4em;
+    right: 40%;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:active, &:hover {
+      transform: rotate(90deg) scale(1.1);
+    }
+  }
+}

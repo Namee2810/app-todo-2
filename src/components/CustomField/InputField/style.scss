@@ -1,0 +1,11 @@
+.Input {
+  transition: all .25s;
+  
+  height: 50px;
+  border: {
+    color: rgb(35, 163, 35);
+  }
+  &:hover, &:focus {
+    outline: none !important;
+  }
+}
