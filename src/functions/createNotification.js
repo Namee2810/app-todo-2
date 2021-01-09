@@ -11,8 +11,9 @@ const createNotification = (type, title, message, duration) => {
     animationOut: ["animate__animated", "animate__fadeOut"],
     dismiss: {
       duration,
-      onScreen: true
-    }
+      onScreen: true,
+      pauseOnHover: true,
+    },
   });
 };
 

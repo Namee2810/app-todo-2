@@ -1,4 +1,14 @@
 .TodoList {
-  margin-top: 3em;
-  min-height: 80%;
+  margin: 4em 0 3em;
+  min-height: 100%;
+  border: {
+    width: 1px 0 0 0;
+    color: rgb(255, 255, 255);
+    style: solid;
+  }
+  transition: all 0.25s;
+
+  &__hide {
+    opacity: 0;
+  }
 }

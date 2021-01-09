@@ -1,12 +1,14 @@
+import classNames from "classnames";
 import InputField from 'components/CustomField/InputField';
-import createNotification from 'createNotification';
 import { FastField, Form, Formik } from 'formik';
+import createNotification from 'functions/createNotification';
+import generatorKey from "functions/generatorKey";
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodoItem } from 'store/todoSlice';
 import * as Yup from "yup";
-import AddButton from "./add-button.png";
+import AddButton from "./add_button.png";
 import "./style.scss";
 
 function AddTodo(props) {
@@ -17,14 +19,21 @@ function AddTodo(props) {
     width: "100px",
     height: "50px",
   };
-
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
-  const state = useSelector(state => state);
+  const todoList = useSelector(state => state.todoList);
 
   const validationChema = Yup.object().shape({
     todo: Yup.string().required("This field is required"),
   });
+
+  const getRemainingTodo = () => {
+    let result = 0;
+    todoList.forEach(item => {
+      if(!item.isDone) result++;
+    })
+    return result;
+  }
 
   const handleClickAddButton = () => {
     setShow(true);
@@ -33,15 +42,18 @@ function AddTodo(props) {
     setShow(false);
   }
   const handleSubmitAddTodoForm = (values) => {
-    const action = addTodoItem({
-      id: state.todoList.length,
-      content: values.todo
-    });
+    const item = {
+      id: generatorKey(16),
+      content: values.todo,
+      isDone: false
+    }
+    const action = addTodoItem(item);
     dispatch(action);
+
     setShow(false);
     createNotification(
       "success",
-      `Đã thêm "${values.todo.length > 20 ? values.todo.slice(20)+'...' : values.todo}" !`,
+      `Đã thêm "${values.todo.length > 20 ? values.todo.slice(0,20)+'...' : values.todo}" !`,
       " ",
       3000
     );
@@ -49,11 +61,15 @@ function AddTodo(props) {
   
   return (
     <div className="AddTodo">
-      <img className="AddTodo__button"
-        src={AddButton} alt="+" width="72px" height="72px"
-        onClick={handleClickAddButton}
+      <img src={AddButton} alt="+" 
+        className={classNames("AddTodo__button", {"AddTodo__button__click": show})}
+        onClick={handleClickAddButton}  
       />
+      <div className="AddTodo__remaining">Cần hoàn thành <span className="AddTodo__remaining__value">{getRemainingTodo()}</span></div>
       <Modal show={show} onHide={handleCloseAddTodoForm} size="md" centered>
+      <Modal.Header>
+          <Modal.Title>Thêm công việc</Modal.Title>
+        </Modal.Header>
         <Modal.Body>
           <Formik
             initialValues={initialValues}

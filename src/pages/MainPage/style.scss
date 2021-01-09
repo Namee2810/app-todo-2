@@ -1,9 +1,14 @@
 .MainPage {
+  position: relative;
+  opacity: 0;
   background-color: #F0EFE9;
   min-height: 100vh;
-  padding: 50px 10px;
+  padding: 60px 10px;
+  transition: all 2s;
 
-  transition-delay: 2s;
+  &__loaded {
+    opacity: 1;
+  }
 
   &__main {
     min-height: 80vh;
@@ -16,5 +21,5 @@
       0 17.7px 14.2px rgba(0, 0, 0, 0.025),
       0 36.5px 29.2px rgba(0, 0, 0, 0.03),
       0 100px 80px rgba(0, 0, 0, 0.07)
-    }
+    };
 }

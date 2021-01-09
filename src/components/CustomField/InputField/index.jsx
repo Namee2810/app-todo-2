@@ -36,6 +36,7 @@ function InputField(props) {
         type={type}
         disable={disable}
         placeholder={placeholder}
+        autoFocus={true}
 
         invalid={showError}
       />
