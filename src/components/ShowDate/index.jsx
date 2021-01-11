@@ -4,7 +4,7 @@ import "./style.scss";
 const getDate = () => {
   const now = new Date();
   const result = {
-    day: now.getDay() > 1 ? `THỨ ${now.getDay()+1}` : now.getDay() ? "THỨ 7" : "CHỦ NHẬT",
+    day: now.getDay() === 0 ? "CHỦ NHẬT" : `THỨ ${now.getDay()+1}`,
     date: now.getDate().toString(),
     month: `THÁNG ${now.getMonth()+1}`,
     year: now.getFullYear().toString(),
