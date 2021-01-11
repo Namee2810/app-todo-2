@@ -1,9 +1,4 @@
-import AddTodo from 'components/AddTodo';
 import Loading from 'components/Loading';
-import Menu from "components/Menu";
-import NavBar from 'components/NavBar';
-import ShowDate from 'components/ShowDate';
-import TodoList from 'components/TodoList';
 import createNotification from "functions/createNotification";
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from "react-bootstrap";
@@ -13,6 +8,11 @@ import Cookies from 'universal-cookie';
 import "./style.scss";
 
 const cookies = new Cookies();
+const ShowDate = React.lazy(() => import('components/ShowDate'));
+const AddTodo = React.lazy(() => import('components/AddTodo'));
+const NavBar = React.lazy(() => import('components/NavBar'));
+const TodoList = React.lazy(() => import('components/TodoList'));
+const Menu = React.lazy(() => import('components/Menu'));
 
 function MainPage(props) {
   const [loaded, setLoaded] = useState(false);
@@ -31,7 +31,9 @@ function MainPage(props) {
     setTimeout(() => {
       setLoaded(true);
       createNotification("success", "Đã kết nối !", " ", 2000);
-      document.getElementById("main").classList.add("MainPage__loaded")
+      setTimeout(() => {
+        document.getElementById("main").classList.add("MainPage__loaded");
+      }, 200);   
     }, 1000);
   }, []);
   
