@@ -1,6 +1,5 @@
-import Loading from 'components/Loading';
 import createNotification from "functions/createNotification";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { loadTodoList } from 'store/todoSlice';
@@ -15,7 +14,6 @@ const TodoList = React.lazy(() => import('components/TodoList'));
 const Menu = React.lazy(() => import('components/Menu'));
 
 function MainPage(props) {
-  const [loaded, setLoaded] = useState(false);
   
   const dispatch = useDispatch();
 
@@ -27,33 +25,27 @@ function MainPage(props) {
   dispatch(action);
   
   useEffect(() => {
-
+    createNotification("success", "Đã kết nối !", " ", 2000);
     setTimeout(() => {
-      setLoaded(true);
-      createNotification("success", "Đã kết nối !", " ", 2000);
-      setTimeout(() => {
-        document.getElementById("main").classList.add("MainPage__loaded");
-      }, 200);   
-    }, 1000);
+      document.getElementById("main").classList.add("MainPage__loaded");
+    }, 500); 
   }, []);
   
   return (
-    loaded ? 
-      <div className="MainPage" id="main">
-        <Container>
-          <Row>
-            <Col lg="3" md="2"/>
-            <Col lg="6" md="8" className="MainPage__main">
-              <ShowDate/>
-              <AddTodo/>
-              <NavBar/>
-              <TodoList/>
-            </Col>
-          </Row> 
-        </Container>
-        <Menu/>
-      </div>
-    : <Loading/>
+    <div className="MainPage" id="main">
+      <Container>
+        <Row>
+          <Col lg="3" md="2"/>
+          <Col lg="6" md="8" className="MainPage__main">
+            <ShowDate/>
+            <AddTodo/>
+            <NavBar/>
+            <TodoList/>
+          </Col>
+        </Row> 
+      </Container>
+      <Menu/>
+    </div>
   );
 }
 
